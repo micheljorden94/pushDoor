@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			list-style: none;
+		}
+		#picLists{
+			position: relative;
+			width: 1000px;
+			height: 400px;
+			border: 1px solid #ccc;
+			overflow: hidden;
+			margin: 0 auto;
+		}
+	    #picLists ul li{
+	    	position: absolute;
+	    	width: 1000px;
+	    	height: 400px;
+	    }
+	    img{
+	    	width: 100%;
+	    	height: 400px;
+	    	cursor: pointer;
+	    }
+	</style>
+	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+</head>
+<body>
+	<div id="picLists">
+		<ul>
+			<li><img src="han1.jpg" alt=""></li>
+			<li><img src="han2.jpg" alt=""></li>
+			<li><img src="han3.jpg" alt=""></li>
+			<li><img src="han4.jpg" alt=""></li>
+			<li><img src="han5.jpg" alt=""></li>
+		</ul>
+	</div>
+	<script>
+		$(document).ready(function(){
+			var myLi = $('#picLists').find('li');
+			for(var i = 0; i < myLi.length; i++){
+				myLi.eq(i).css({'left':i*200+'px'});
+			}
+
+			myLi.hover(function(){
+				var inIndex = $(this).index();
+				for(var j = 1; j <= inIndex; j++){
+					myLi.eq(j).stop().animate({'left':j*50+'px'},300);
+				}
+				for(var j = inIndex+1; j < myLi.length; j++){
+					myLi.eq(j).stop().animate({'left':750+j*50+'px'},300);
+				}
+			},function(){
+				for(var i = 0; i < myLi.length; i++){
+					myLi.eq(i).stop().animate({'left':i*200+'px'},300);
+				}
+			});
+		});
+	</script>
+</body>
+</html>
